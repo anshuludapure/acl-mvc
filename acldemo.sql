@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2017 at 04:45 AM
+-- Generation Time: Jan 23, 2017 at 04:33 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -114,6 +114,20 @@ CREATE TABLE IF NOT EXISTS `permission_role` (
   KEY `permission_role_role_id_foreign` (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `permission_role`
+--
+
+INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1),
+(6, 1),
+(7, 1),
+(8, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -129,7 +143,16 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `roles_name_unique` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `display_name`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'Admin', 'Admin', NULL, NULL),
+(2, 'Manager', 'Manager', 'Manager', NULL, NULL),
+(3, 'Clerk', 'Clerk', 'Clerk', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -143,6 +166,14 @@ CREATE TABLE IF NOT EXISTS `role_user` (
   PRIMARY KEY (`user_id`,`role_id`),
   KEY `role_user_role_id_foreign` (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `role_user`
+--
+
+INSERT INTO `role_user` (`user_id`, `role_id`) VALUES
+(4, 1),
+(4, 2);
 
 -- --------------------------------------------------------
 
@@ -159,22 +190,24 @@ CREATE TABLE IF NOT EXISTS `users` (
   `photo` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
   `gender` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `jd` text COLLATE utf8_unicode_ci NOT NULL,
+  `role` int(11) NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `phone`, `dob`, `photo`, `gender`, `jd`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'anshul', 'anshul.udapure@gmail.com', 900990287, '03-08-1982', '', 'male', 'abcd', '$2y$10$uwOjarE2bfHWWvGQ50x9T.sA08EvvR4eegNgDkvhnj/nFvd00xNQq', 'OqKepvzP7w1CYKuruIMat8xDL4U7XNoj1RdCXUgIGKk5kU4AOtsqpSKAjIpo', '2017-01-20 05:24:15', '2017-01-20 05:51:49'),
-(2, 'abc address 2', 'anshul.udapure2@gmail.com', 0, '', '', '', '', '$2y$10$Tr/kQw4I10kH.V3bgS9UoecgxNBTBXFvpTv/rLnhC.B0aR5L5twKG', NULL, '2017-01-22 05:27:23', '2017-01-22 05:27:23'),
-(3, 'abc address 2', 'anshul.udapure4@gmail.com', 0, '', '', '', '', '$2y$10$CShqXyhJDAY8EccLJf9oCe1xJCqzjfeEt/pv0Ex7qGCNykRfOuGX6', NULL, '2017-01-22 05:33:36', '2017-01-22 05:33:36');
+INSERT INTO `users` (`id`, `name`, `email`, `phone`, `dob`, `photo`, `gender`, `jd`, `role`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'anshul', 'anshul.udapure@gmail.com', 900990287, '03-08-1982', '', 'male', 'abcd', 0, '$2y$10$uwOjarE2bfHWWvGQ50x9T.sA08EvvR4eegNgDkvhnj/nFvd00xNQq', 'nIefyq1VSJvCqu6Y2cQv0FYbRrPj97pbVqxjfOGomA0aR35rQGEVyZablV5r', '2017-01-20 05:24:15', '2017-01-23 08:03:27'),
+(2, 'abc address 2', 'anshul.udapure2@gmail.com', 0, '', '', '', '', 0, '$2y$10$Tr/kQw4I10kH.V3bgS9UoecgxNBTBXFvpTv/rLnhC.B0aR5L5twKG', NULL, '2017-01-22 05:27:23', '2017-01-22 05:27:23'),
+(3, 'abc address 2', 'anshul.udapure4@gmail.com', 0, '', '', '', '', 0, '$2y$10$CShqXyhJDAY8EccLJf9oCe1xJCqzjfeEt/pv0Ex7qGCNykRfOuGX6', NULL, '2017-01-22 05:33:36', '2017-01-22 05:33:36'),
+(4, 'Anshul', 'anshul.udapure12@gmail.com', 0, '', '', '', '', 0, '$2y$10$af.fNIekA12lscLK6S20zO2xfMDx34GRM7MPn0nQI6wSM3grZbGeu', NULL, '2017-01-23 08:00:35', '2017-01-23 08:00:35');
 
 --
 -- Constraints for dumped tables
